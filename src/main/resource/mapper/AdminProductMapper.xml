@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ssm.dao.AdminProductMapper">
+    <select id="findAllProduct" parameterType="Product"
+        resultType="ssm.entity.Product">
+        select * from product
+    </select>
+
+    <select id="findAllCategory" parameterType="Category"
+            resultType="ssm.entity.Category">
+        select * from category
+    </select>
+    <select id="addProduct" parameterType="Product"
+            resultType="ssm.entity.Product">
+        insert into product values(#{pid},#{pname},#{market_price},
+        #{shop_price},#{pimage},#{pdate},#{is_hot},#{pdesc},#{pflag},#{cid})
+    </select>
+    <select id="delProductById" parameterType="Product">
+        delete from product where pid=#{pid}
+    </select>
+    <select id="findProductById" parameterType="Product"
+        resultType="ssm.entity.Product">
+        select * from product where pid=#{pid}
+    </select>
+    <!-- 此处能不能用动态sql ??????-->
+    <select id="updateProduct" parameterType="Product">
+        update product set 
+            pname = #{pname},
+            market_price = #{market_price},
+            shop_price = #{shop_price},
+            pimage = #{pimage},
+            pdate = #{pdate},
+            is_hot = #{is_hot},
+            pdesc = #{pdesc},
+            pflag = #{pflag},
+            cid = #{cid} 
+        where pid = #{pid}
+    </select>
+    
+    <!-- 这里用到的是mybatis的动态sql-->
+    <!-- mybatis 官方文档关于动态sql: http://www.mybatis.org/mybatis-3/zh/dynamic-sql.html-->
+    <select id="findProductListByConditionVo" parameterType="ssm.vo.ConditionVo"
+            resultType="ssm.entity.Product">
+        select * from product
+        <where>
+            <if test="pname != null and pname != ''" >
+            <bind name="pnameLike" value="'%' + pname + '%'" />
+                pname like #{pnameLike}
+            </if>
+            <if test="isHot != null and isHot != ''">
+                and is_hot = #{isHot}
+            </if>
+            <if test="cid != null and cid != ''">
+                and cid = #{cid}
+            </if>
+        </where>
+    </select>
+</mapper>
