@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- 缓存的层级 -->
+    <context:component-scan base-package="ssm.cache" />
+    <!-- 引入redis配置 -->
+    <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true" />
+
+    <!-- Redis 连接池配置 -->
+    <bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.pool.maxIdle}" />
+        <property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}" />
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+        <property name="maxTotal" value="${redis.pool.maxTotal}" />
+    </bean>
+    
+    <!-- redis单节点数据库连接配置 -->
+    <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="poolConfig" ref="redisPoolConfig"/>
+        <property name="hostName" value="${redis.ip}"/>
+        <property name="port" value="${redis.port}" />
+        <property name="password" value="${redis.password}"/>
+    </bean>
+    
+    <!-- redisTemplate配置，redisTemplate是Jedis对redis操作的扩展，有更多的操作，封装使得操作更加便捷-->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="redisConnectionFactory"/>
+        <!-- ??????????????????????  键值序列化 -->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+</beans>
