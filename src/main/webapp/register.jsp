@@ -55,7 +55,7 @@ font {
 			//目的：对输入的username进行ajax校验
 			$.ajax({
 				"async":false,
-				"url":"${pageContext.request.contextPath}/checkUsername",
+				"url":"${pageContext.request.contextPath}/register/checkUsername",
 				"data":{"username":value},
 				"type":"POST",
 				"dataType":"json",
@@ -130,7 +130,7 @@ font {
 			<div class="col-md-8"
 				style="background: #fff; padding: 40px 80px; margin: 30px; border: 7px solid #ccc;">
 				<font>会员注册</font>USER REGISTER
-				<form id="myform" class="form-horizontal" action="${pageContext.request.contextPath }/register" method="post" style="margin-top: 5px;">
+				<form id="myform" class="form-horizontal" action="${pageContext.request.contextPath }/register/" method="post" style="margin-top: 5px;">
 					<div class="form-group">
 						<label for="username" class="col-sm-2 control-label">用户名</label>
 						<div class="col-sm-6">

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ssm.dao.ProductMapper">
+    <select id="findAllProduct" parameterType="Product"
+            resultType="ssm.entity.Product">
+        select * 
+        from product
+    </select>
+    <select id="getTotalCount" parameterType="Product"
+        resultType="int">
+        select count(*) 
+        from product
+    </select>
+    <select id="findProductListForPageBean" parameterType="Product"
+            resultType="ssm.entity.Product">
+        select * 
+        from product 
+             limit #{offset},#{limit}
+    </select>
+    <!-- 热门商品 -->
+    <select id="findHotProductList" parameterType="Product"
+            resultType="ssm.vo.ProductVo">
+        select * from product 
+        where is_hot = 1 
+        limit 0,9
+    </select>
+    <!-- 最新商品 -->
+    <select id="findNewProductList" parameterType="Product"
+            resultType="ssm.vo.ProductVo">
+        select * from product
+        order by pdate desc 
+        limit 0,9
+    </select>
+    
+    <select id="findAllCategory" parameterType="Category"
+            resultType="ssm.entity.Category">
+        select * 
+        from category
+    </select>
+    <select id="getTotalCountByCid" parameterType="String"
+            resultType="int">
+        select count(*) 
+        from product 
+        where cid = #{cid}
+    </select>
+    <select id="findProductListForPageBeanByCid" parameterType="Product"
+            resultType="ssm.entity.Product">
+        select * 
+        from product 
+        where cid = #{cid} 
+        limit #{offset},#{limit}
+    </select>
+    <select id="findProductByPid" parameterType="String"
+            resultType="Product">
+        select * 
+        from product 
+        where pid = #{pid}
+    </select>
+    <select id="findProductVoByPid" parameterType="String"
+            resultType="ssm.vo.ProductVo">
+        select *
+        from product
+        where pid = #{pid}
+    </select>
+    
+    <select id="addOrders" parameterType="Order">
+        insert into orders
+        values (
+            #{oid},
+            #{orderTime},
+            #{total},
+            #{state},
+            #{address},
+            #{name},
+            #{telephone},
+            #{user.uid}
+        )
+    </select>
+    <select id="addOrderItem" parameterType="OrderItem">
+        insert into orderitem
+        values (
+            #{itemId},
+            #{count},
+            #{subtotal},
+            #{product.pid},
+            #{order.oid}
+        )
+    </select>
+    <update id="updateOrderAddr" parameterType="Order">
+        update orders
+        set 
+        address = #{address},
+        name = #{name},
+        telephone = #{telephone},
+        where oid = #{oid}
+    </update>
+    <select id="findAllOrdersByUid" parameterType="String"
+            resultType="Order">
+        select * 
+        from orders
+        where uid = #{uid}
+    </select>
+    <resultMap id="allOrderItemByOid" type="OrderItem">
+        <result property="count" column="count"/>
+        <result property="subtotal" column="subtotal"/>
+        <association property="product" column="product" javaType="Product">
+            <result property="pimage" column="pimage"/>
+            <result property="pname" column="pname"/>
+            <result property="shop_price" column="shop_price"/>
+        </association>
+    </resultMap>
+    <select id="findAllOrderItemByOid" parameterType="String"
+            resultMap="allOrderItemByOid">
+        select i.count, i.subtotal, p.pimage, p.pname, p.shop_price
+        from orderitem i, product p
+        where i.pid = p.pid and i.oid = #{oid}
+    </select>
+</mapper>    

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ssm.dao.AdminProductMapper;
 import ssm.entity.Category;
+import ssm.entity.Order;
+import ssm.entity.OrderItem;
 import ssm.entity.Product;
 import ssm.service.AdminProductService;
 import ssm.vo.ConditionVo;
@@ -48,5 +50,15 @@ public class AdminProductServiceImpl implements AdminProductService {
     @Override
     public List<Product> findProductListByConditionVo(ConditionVo conditionVo) {
         return mapper.findProductListByConditionVo(conditionVo);
+    }
+
+    @Override
+    public List<Order> findAllOrders() {
+        return mapper.findAllOrders();
+    }
+
+    @Override
+    public List<OrderItem> finOrderInfoByOid(String oid) {
+        return mapper.finOrderInfoByOid(oid);
     }
 }

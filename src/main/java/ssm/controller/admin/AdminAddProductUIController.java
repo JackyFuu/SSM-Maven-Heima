@@ -19,8 +19,9 @@ public class AdminAddProductUIController {
     
     @RequestMapping(value = "/adminAddProductUI", method = RequestMethod.GET)
     public String doGetAddProductUI(HttpServletRequest request, HttpServletResponse response){
-        List<Category> categoryList = service.findAllCategory();
-        request.setAttribute("categoryList", categoryList);
+        //由于WEB-33使用了Ajax，这里不需要再次查询所有分类。
+//        List<Category> categoryList = service.findAllCategory();
+//        request.setAttribute("categoryList", categoryList);
         return "/admin/product/add";
     }
 }

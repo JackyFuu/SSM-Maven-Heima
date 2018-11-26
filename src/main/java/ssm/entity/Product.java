@@ -1,6 +1,8 @@
 package ssm.entity;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
 
 	/*`pid` varchar(32) NOT NULL,
 	  `pname` varchar(50) DEFAULT NULL,

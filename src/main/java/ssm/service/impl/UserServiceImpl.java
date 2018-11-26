@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService {
         isExist = mapper.checkUserName(username);
         return isExist>0;
     }
+
+    @Override
+    public User login(String username, String password) {
+        return mapper.login(username, password);
+    }
 }

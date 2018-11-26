@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+@RequestMapping("/register")
 @Controller
 public class RegisterController {
     @Autowired
@@ -30,7 +31,7 @@ public class RegisterController {
     @Autowired
     CommonsService sendMailService;
     
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public String doRegister(HttpServletRequest request) throws UnsupportedEncodingException {
         
         request.setCharacterEncoding("UTF-8");
@@ -76,7 +77,7 @@ public class RegisterController {
         if(isRegisterSuccess){
             //发送激活邮件
             String emailMsg = "恭喜您注册成功！请点击下面的链接激活您的账户" 
-                    + "<a href='http://localhost:8080/active?activeCode=" + activeCode + "'>"
+                    + "<a href='http://localhost:8080/register/active?activeCode=" + activeCode + "'>"
                     + "http://localhost:8080/active?activeCode=" + activeCode + "</a>";
             sendMailService.sendActivateMail(user.getEmail(),emailMsg);
             //跳转到注册成功页面
@@ -97,8 +98,6 @@ public class RegisterController {
         
         return "redirect:"+ request.getContextPath() + "/login.jsp";
     }
-    
-    
     
     @ResponseBody         //返回json，需要此注解
     @RequestMapping("/checkUsername")

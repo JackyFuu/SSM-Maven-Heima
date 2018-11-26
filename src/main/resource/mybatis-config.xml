@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
+<!-- spring + mybatis 没有必要配置transactionManager，Spring 模块会使用自带的管理器来覆盖前面的配置-->
 <configuration>
     <!-- 配置全局属性 -->
     <settings>

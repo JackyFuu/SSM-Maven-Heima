@@ -32,4 +32,11 @@
         where username = #{username}
     </select>
     
+    <select id="login" parameterType="String"
+            resultType="User">
+        select *
+        from user
+        where username = #{username} and password = #{password}
+    </select>
+    
 </mapper>

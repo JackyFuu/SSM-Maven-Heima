@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,7 @@ body {
 				<table class="table table-bordered">
 					<tbody>
 						<tr class="warning">
-							<th colspan="5">订单编号:9005</th>
+							<th colspan="5">订单编号:${order.oid}</th>
 						</tr>
 						<tr class="warning">
 							<th>图片</th>
@@ -43,21 +44,24 @@ body {
 							<th>数量</th>
 							<th>小计</th>
 						</tr>
-						<tr class="active">
-							<td width="60" width="40%"><input type="hidden" name="id"
-								value="22"> <img src="./image/dadonggua.jpg" width="70"
-								height="60"></td>
-							<td width="30%"><a target="_blank"> 有机蔬菜 大冬瓜...</a></td>
-							<td width="20%">￥298.00</td>
-							<td width="10%">5</td>
-							<td width="15%"><span class="subtotal">￥596.00</span></td>
-						</tr>
+						<c:forEach items="${order.orderItems}" var="orderItem">
+							<tr class="active">
+								<td width="60" width="40%"><input type="hidden" name="id"
+																  value="22"> <img src="${pageContext.request.contextPath}/${orderItem.product.pimage}" width="70"
+																				   height="60"></td>
+								<td width="30%"><a target="_blank"> ${orderItem.product.pname}</a></td>
+								<td width="20%">￥${orderItem.product.shop_price}</td>
+								<td width="10%">${orderItem.count}</td>
+								<td width="15%"><span class="subtotal">￥${orderItem.subtotal}</span></td>
+							</tr>
+						</c:forEach>
+						
 					</tbody>
 				</table>
 			</div>
 
 			<div style="text-align: right; margin-right: 120px;">
-				商品金额: <strong style="color: #ff6600;">￥596.00元</strong>
+				商品金额: <strong style="color: #ff6600;">￥${order.total}元</strong>
 			</div>
 
 		</div>

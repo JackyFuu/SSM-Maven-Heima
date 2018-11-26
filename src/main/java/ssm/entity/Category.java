@@ -1,6 +1,9 @@
 package ssm.entity;
 
-public class Category {
+import java.io.Serializable;
+
+//存入redis的pojo类必须实现Serializable
+public class Category implements Serializable {
     private String cid;
     private String cname;
 

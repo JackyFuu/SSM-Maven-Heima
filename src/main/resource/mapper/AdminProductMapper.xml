@@ -57,4 +57,22 @@
             </if>
         </where>
     </select>
+    <select id="findAllOrders" resultType="Order">
+        select * from orders
+    </select>
+    <resultMap id="allOrderItemByOid" type="OrderItem">
+        <result property="count" column="count"/>
+        <result property="subtotal" column="subtotal"/>
+        <association property="product" column="product" javaType="Product">
+            <result property="pimage" column="pimage"/>
+            <result property="pname" column="pname"/>
+            <result property="shop_price" column="shop_price"/>
+        </association>
+    </resultMap>
+    <select id="finOrderInfoByOid" parameterType="String"
+            resultMap="allOrderItemByOid">
+        select p.shop_price, p.pname, p.pimage, i.count, i.subtotal
+        from orderitem i, product p
+        where i.pid = p.pid and oid = #{oid}
+    </select>
 </mapper>

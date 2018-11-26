@@ -21,6 +21,16 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+  <!-- 默认首页  start -->
+  <servlet-mapping>
+    <servlet-name>spring-dispatcher</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index</welcome-file>
+  </welcome-file-list>
+  <!-- 默认首页  end --> 
+  
   <!-- druid -->
   <servlet>
     <servlet-name>DruidStatView</servlet-name>

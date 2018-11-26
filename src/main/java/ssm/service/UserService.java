@@ -8,4 +8,6 @@ public interface UserService {
     void mailActivate(String activeCode);
 
     boolean checkUserName(String username);
+
+    User login(String username, String password);
 }

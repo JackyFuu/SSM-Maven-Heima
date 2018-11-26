@@ -13,7 +13,7 @@ public class PageBean<T> {
     //总页数
     private int totalPage;
     //每页显示的数据   这里使用了泛型
-    private List<T> productList = new ArrayList<T>();
+    private List<T> productList;
 
     public int getCurrentPage() {
         return currentPage;

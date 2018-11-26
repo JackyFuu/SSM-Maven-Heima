@@ -22,6 +22,15 @@ body {
 	height: 300px;
 }
 </style>
+	
+<script type="text/javascript">
+	function addCart() {
+		//获得购买的商品的数量
+		var buyNum = $("#buyNum").val();
+		location.href = "${pageContext.request.contextPath}/addProductToCart?pid=${product.pid}&buyNum="+buyNum;
+		
+    }
+</script>	
 </head>
 
 <body>
@@ -40,21 +49,21 @@ body {
 				<div class="col-md-6">
 					<img style="opacity: 1; width: 400px; height: 350px;" title=""
 						class="medium"
-						src="image/r___________renleipic_01/bigPic5f3622b8-028a-4e62-a77f-f41a16d715ed.jpg">
+						src="${pageContext.request.contextPath}/${product.pimage}">
 				</div>
 
 				<div class="col-md-6">
 					<div>
-						<strong>大冬瓜</strong>
+						<strong>${product.pname}</strong>
 					</div>
 					<div
 						style="border-bottom: 1px dotted #dddddd; width: 350px; margin: 10px 0 10px 0;">
-						<div>编号：751</div>
+						<div>编号：${product.pid}</div>
 					</div>
 
 					<div style="margin: 10px 0 10px 0;">
-						亿家价: <strong style="color: #ef0101;">￥：4.78元/份</strong> 参 考 价：
-						<del>￥6.00元/份</del>
+						亿家价: <strong style="color: #ef0101;">￥：${product.shop_price}元/份</strong> 参 考 价：
+						<del>￥${product.market_price}元/份</del>
 					</div>
 
 					<div style="margin: 10px 0 10px 0;">
@@ -68,16 +77,20 @@ body {
 
 						<div
 							style="border-bottom: 1px solid #faeac7; margin-top: 20px; padding-left: 10px;">
-							购买数量: <input id="quantity" name="quantity" value="1"
+							购买数量: <input id="buyNum" name="buyNum" value="1"
 								maxlength="4" size="10" type="text">
 						</div>
 
 						<div style="margin: 20px 0 10px 0;; text-align: center;">
-							<a href="cart.htm"> <input
+							<a href="javascript:void(0);" onclick="addCart()">
+								<input
 								style="background: url('./images/product.gif') no-repeat scroll 0 -600px rgba(0, 0, 0, 0); height: 36px; width: 127px;"
 								value="加入购物车" type="button">
 							</a> &nbsp;收藏商品
 						</div>
+					</div>
+					<div>
+						<a href="${pageContext.request.contextPath}/productListByCid?cid=${cid}&currentPage=${currentPage}">返回列表页面</a>
 					</div>
 				</div>
 			</div>
@@ -90,7 +103,7 @@ body {
 
 				<div>
 					<img
-						src="image/r___________renleipic_01/bigPic139f030b-d68b-41dd-be6d-b94cc568d3c5.jpg">
+						src="${pageContext.request.contextPath}/${product.pimage}">
 				</div>
 
 				<div

@@ -9,4 +9,6 @@ public interface UserMapper {
     void mailActivate(@Param("activeCode") String activeCode);
 
     Long checkUserName(@Param("username") String username);
+
+    User login(@Param("username") String username,@Param("password") String password);
 }

@@ -1,6 +1,8 @@
 package ssm.dao;
 
 import ssm.entity.Category;
+import ssm.entity.Order;
+import ssm.entity.OrderItem;
 import ssm.entity.Product;
 import ssm.vo.ConditionVo;
 
@@ -20,4 +22,8 @@ public interface AdminProductMapper {
     public void updateProduct(Product product);
 
     public List<Product> findProductListByConditionVo(ConditionVo conditionVo);
+
+    List<Order> findAllOrders();
+
+    List<OrderItem> finOrderInfoByOid(String oid);
 }
