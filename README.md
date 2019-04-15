@@ -1,5 +1,7 @@
 ### 项目内容：SSM(Spring+Springmvc+Mybatis)框架的商城小项目
 ##### 技术基础：
+- **JDK版本**：1.8+
+- **Tomcat版本**: 8.5
 - **代码编辑器**：`IDEA`
 - **`Maven`项目管理工具**（这样就只需要引入dependency，maven工具会自动为你下载需要的jar包）;
 比如你需要`junit`的jar包，直接在`pom.xml`文件中加入下面代码（可以在`maven repository`中找到）就可以了。具体操作请自行百度。
