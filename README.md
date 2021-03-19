@@ -34,7 +34,7 @@
 
 
 ##### 资源下载：
-- [项目视频](链接：https://pan.baidu.com/s/1rnmrioE7HSEaxuElKpjLlA)  提取码：t7hv <br>
+- [项目视频](https://pan.baidu.com/s/1rnmrioE7HSEaxuElKpjLlA)  提取码：t7hv <br>
 - [项目`Github`地址](https://github.com/JackyFuu/SSM-Maven-Heima)
 
 **数据库表、web页面都在WEB28/资源中：**
